@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Bachelorarbeit - „kurzer Abstract“
+##### Gesundheitsinformatik
+##### David Melzer
+##### 7. Semester
+##### Prof. Dr. Dambe
 
-## Getting Started
+---
+#### Kontext der Bachelorarbeit
+Die Studierenden der Gesundheitsinformatik an der HTWG Konstanz haben zu Beginn des Studiums die Vorlesung „Medizinische Terminologie“ bei Prof. Dr. Dambe. In dieser lernen die Studierenden den Fachwortschatz der Medizin und wie dieser zu verwenden ist. Das Ziel für die Studierenden ist es den Vokabeltest zu bestehen, welcher benötigt wird, um die Vorlesung zu absolvieren. Um sich für diesen vorzubereiten, lernen sie mithilfe von Excel-Listen und (Anki-)Karteikarten.
 
-First, run the development server:
+#### Ziele der Bachelorarbeit
+Diese Bachelorarbeit hat zum Ziel den Lernprozess der Studierenden einfacher, spielerischer und abwechslungsreicher zu gestalten. Dies soll mithilfe einer Anwendung erreicht werden. Im Rahmen dieser Bachelorarbeit wird eine Anwendung unter Verwendung von gelernten Inhalten der Vorlesungen Requirements Engineering, IT-Projektmanagement und Software-Engineering entstehen.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+#### Werkzeuge und Toolstack
+Um die Anwendung zu realisieren, wird eine gewisse Menge an Technologien benötigt. Die folgenden gewählten Technologien sind drauf ausgelegt primär eine möglichst performante, optisch ansprechende und für mobile Geräte optimierte Anwendung zu erzeugen.
+Toolstack:
+- React.js: Frontend JavaScript Library
+- Next.js: React.js Framework
+- TailwindCSS: CSS Framework mit mobile-first Ansatz
+- Backend: Quarkus/Express.js/meteor.js ...?
+- Datenbank: SQL/MySQL/Postgres ...?
+- Vercel: Frontend Hosting für React.js / Next.js Anwendungen
+- Heroku: Backend Hosting
+- GitHub/GitLab: Versionierungssystem
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+"Werkzeuge":
+- Requirements Engineering
+- IT-Projektmanagement
+- Software-Engineering
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+#### weitere Gedanken:
+- verschiedene Übungsmodi - angelehnt an Fruit Ninja
+- Anwendung als PWA → Offline-Verfügbarkeit ohne Prüfung durch App- bzw. Google Play Store
+- Zielgruppe ausweiten auf
+    - andere Studiengänge mit medizinischem Kontext
+    - medizinisches Ausbildungspersonal
+    - Pflegepersonal
+- Rangliste, Erfolge, Belohnungen (klassische Konzepte von mobilen Games)
