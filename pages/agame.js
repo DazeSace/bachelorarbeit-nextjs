@@ -16,6 +16,7 @@ const Agame = () => {
     const letters = [...data.word]
     const [placed, setPlaced] = useState([])
     const [numOfSplits, setNumOfSplits] = useState(data.splits.length)
+    const [result, setResult] = useState('')
 
 
     return (
@@ -45,8 +46,10 @@ const Agame = () => {
                                 </div>))
                             }
                         </div>
+                        <p className={'text-2xl text-center font-bold mt-4'}>{result}</p>
                         <div
-                            className={'flex justify-center mt-8 py-2 font-bold text-white border-fogra border-2 bg-midnight rounded-md w-1/4 mx-auto cursor-pointer'}>
+                            className={'flex justify-center mt-6 py-2 font-bold text-white border-fogra border-2 bg-midnight rounded-md w-1/4 mx-auto cursor-pointer'}
+                            onClick={() => buttonHandler()}>
                             <p>WEITER</p>
                         </div>
                     </div>
@@ -57,6 +60,20 @@ const Agame = () => {
             </footer>
         </>
     )
+
+    function buttonHandler() {
+        let expected = data.splits
+        if(checker(placed, expected)){
+            setResult('Super, das ist richtig!')
+        } else {
+            setResult("Versuch's nochmal")
+        }
+
+    }
+
+    function checker(arr, target){
+        return target.every(v => arr.includes(v))
+    }
 
     function updateSplits(index) {
         if (!placed.includes(index)) {
