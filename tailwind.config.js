@@ -8,6 +8,7 @@ module.exports = {
         'ncs': '#118AB2',
         'carib': '#06D6A0',
         'fogra': '#020E13',
+        'process': '#32BDEC'
       },
     },
   },
