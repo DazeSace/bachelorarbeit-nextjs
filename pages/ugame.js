@@ -29,7 +29,7 @@ const UGame = () => {
 
     useEffect(() => {
         setOptions(data[counter].options)
-    }, [counter, data])
+    }, [counter])
 
     function optionClickHandler(index) {
         if (index === data[counter].correct) {
