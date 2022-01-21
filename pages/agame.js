@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Navbar from '../components/NavBar';
 import {useState} from "react";
 import Split from "../components/Split";
+import Link from "next/link";
 
 
 const Agame = () => {
@@ -17,6 +18,7 @@ const Agame = () => {
     const [placed, setPlaced] = useState([])
     const [numOfSplits, setNumOfSplits] = useState(data.splits.length)
     const [result, setResult] = useState('')
+    const [ready, setReady] = useState(false)
 
 
     return (
@@ -47,11 +49,19 @@ const Agame = () => {
                             }
                         </div>
                         <p className={'text-2xl text-center font-bold mt-4'}>{result}</p>
-                        <div
-                            className={'flex justify-center mt-6 py-2 font-bold text-white border-fogra border-2 bg-midnight rounded-md w-1/4 mx-auto cursor-pointer'}
-                            onClick={() => buttonHandler()}>
-                            <p>WEITER</p>
-                        </div>
+                        {ready
+                            ? <Link href={'/ugame'} passHref={false}>
+                                <div
+                                    className={'flex justify-center mt-6 py-2 font-bold text-white border-fogra border-2 bg-midnight rounded-md w-1/4 mx-auto cursor-pointer'}>
+                                    <p>WEITER</p>
+                                </div>
+                            </Link>
+                            : <div
+                                className={'flex justify-center mt-6 py-2 font-bold text-white border-fogra border-2 bg-midnight rounded-md w-1/4 mx-auto cursor-pointer'}
+                                onClick={() => buttonHandler()}>
+                                <p>PRÜFEN</p>
+                            </div>
+                        }
                     </div>
                 </div>
             </main>
@@ -63,7 +73,8 @@ const Agame = () => {
 
     function buttonHandler() {
         let expected = data.splits
-        if(checker(placed, expected)){
+        if (checker(placed, expected)) {
+            setReady(true)
             setResult('Super, das ist richtig!')
         } else {
             setResult("Versuch's nochmal")
@@ -71,7 +82,7 @@ const Agame = () => {
 
     }
 
-    function checker(arr, target){
+    function checker(arr, target) {
         return target.every(v => arr.includes(v))
     }
 
@@ -85,7 +96,6 @@ const Agame = () => {
             let tmpIndex = placed.indexOf(index)
             placed.splice(tmpIndex, 1)
         }
-        console.log(placed)
     }
 }
 export default Agame

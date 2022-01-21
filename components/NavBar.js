@@ -6,6 +6,7 @@ const Navbar = () => {
         <nav className={'flex'}>
             <NavButton displayText={'MedTerm.app'} linkDest={'/'}/>
             <NavButton displayText={'A-game'} linkDest={'/agame'}/>
+            <NavButton displayText={'T-game'} linkDest={'/ugame'}/>
         </nav>
     )
 }
