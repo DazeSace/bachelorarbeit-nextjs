@@ -1,9 +1,11 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Head from "next/head";
 import NavBar from "../../components/v2/NavBar";
 import Footer from "../../components/v2/Footer";
 import SplitGame from "../../components/v2/SplitGame";
 import BasicButtonMidnight from "../../components/v2/BasicButtonMidnight";
+import TranslateGame from "../../components/v2/TranslateGame";
+import EndGame from "../../components/v2/EndGame";
 
 const FiveGame = () => {
 
@@ -24,11 +26,8 @@ const FiveGame = () => {
 
     const [points, setPoints] = useState(0)
     const [gamePart, setGamePart] = useState(0)
-    const [result, setResult] = useState([])
-
-    useEffect(() => {
-        console.log(result)
-    }, [result])
+    const [round, setRound] = useState(0)
+    const [resultSplitGame, setResultSplitGame] = useState([])
 
     return (
         <>
@@ -40,16 +39,30 @@ const FiveGame = () => {
             <NavBar/>
             <div className={'text-midnight h-screen -mt-16'}>
                 <div className={'h-full w-11/12 mx-auto'}>
-                    <SplitGame data={data[0]} tellResult={toldResult => handleResultSplitGame(toldResult)}/>
+                    {renderGames(gamePart)}
                     <BasicButtonMidnight link={''} text={'Weiter'} className={''} onClick={handleButtonSplitGame}/>
+                    <p className={'text-center mt-4 text-xl font-bold tracking-wide'}>Punkte: {points}</p>
                 </div>
             </div>
             <Footer/>
         </>
     )
 
+    function renderGames(gamePartStatus) {
+        switch (gamePartStatus) {
+            case 0:
+                return <SplitGame data={data[round]} tellResult={toldResult => handleResultSplitGame(toldResult)}/>
+            case 1:
+                return <TranslateGame data={data[round]}/>
+            case 2:
+                return <EndGame data={data[round]}/>
+            case 3:
+                return <EndGame data={data[round]}/>
+        }
+    }
+
     function handleResultSplitGame(inputResult) {
-        let tmp = result
+        let tmp = resultSplitGame
         let tmp2 = [inputResult]
         if (tmp.includes(inputResult)) {
             let index = tmp.indexOf(inputResult)
@@ -58,17 +71,16 @@ const FiveGame = () => {
             }
         } else {
             tmp.push(...tmp2)
-            setResult(tmp)
+            setResultSplitGame(tmp)
         }
     }
 
     function handleButtonSplitGame() {
-        let expected = data[0].splits
-        if (arrayCompare(result, expected)) {
-            console.log('Super, das ist richtig!')
-        } else {
-            console.log("Versuch's nochmal")
+        let expected = data[round].splits
+        if (arrayCompare(resultSplitGame, expected)) {
+            setPoints(points + 10)
         }
+        setGamePart(gamePart + 1)
     }
 
     function arrayCompare(_arr1, _arr2) {
@@ -88,7 +100,6 @@ const FiveGame = () => {
                 return false;
             }
         }
-
         return true;
     }
 }
