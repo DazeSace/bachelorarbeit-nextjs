@@ -1,13 +1,9 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 
 
 const Split = (props) => {
 
     const [selected, setSelected] = useState(false)
-
-    useEffect(() => {
-        setSelected(props.selected)
-    }, [props.selected])
 
     return (
         <div

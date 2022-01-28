@@ -1,23 +1,34 @@
-import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Head from "next/head";
-import Split from "../../components/Split";
+import NavBar from "../../components/v2/NavBar";
+import Footer from "../../components/v2/Footer";
+import SplitGame from "../../components/v2/SplitGame";
+import BasicButtonMidnight from "../../components/v2/BasicButtonMidnight";
 
-const FiveGame = (props) => {
-    const [question, setQuestion] = useState(0)
+const FiveGame = () => {
 
-    const data = {
-        'word': 'pathophysiologisch',
-        'splits': [4, 10],
-        'syllables': ['patho', 'physio', 'logisch'],
-        'explaination': 'well because it is what it is',
-    }
+    const data = [
+        {
+            'id': 1,
+            'word': 'pathophysiologisch',
+            'splits': [4, 10],
+            'syllables': ['patho', 'physio', 'logisch'],
+        },
+        {
+            'id': 2,
+            'word': 'pathophysiologisch',
+            'splits': [4, 10],
+            'syllables': ['patho', 'physio', 'logisch'],
+        },
+    ]
 
-    const letters = [...data.word]
-    const [placed, setPlaced] = useState([])
-    const [numOfSplits, setNumOfSplits] = useState(data.splits.length)
-    const [result, setResult] = useState('')
-    const [ready, setReady] = useState(false)
+    const [points, setPoints] = useState(0)
+    const [gamePart, setGamePart] = useState(0)
+    const [result, setResult] = useState([])
+
+    useEffect(() => {
+        console.log(result)
+    }, [result])
 
     return (
         <>
@@ -26,73 +37,60 @@ const FiveGame = (props) => {
                 <meta name='description' content='MedTerm App - Medizinische Terminologie lernen'/>
                 <link rel='icon' href='/favicon.ico'/>
             </Head>
-            <main className={'text-midnight w-11/12 mx-auto font-bold'}>
-                <p className={'text-xl pt-4'}>Frage {question}</p>
-                <div className={'flex bg-process py-4 mt-4 justify-center border-fogra border-2 rounded-lg'}>
-                    {letters.map((letter, key) => (
-                        <div
-                            key={key}
-                            className={'flex justify-center text-xl text-fogra font-bold cursor-default'}>
-                            {letter}
-                            {key === letters.length - 1
-                                ? null
-                                : <div onClick={() => updateSplits(key)}>
-                                    <Split selected={placed.includes(key)}/>
-                                </div>
-                            }
-                        </div>))
-                    }
+            <NavBar/>
+            <div className={'text-midnight h-screen -mt-16'}>
+                <div className={'h-full w-11/12 mx-auto'}>
+                    <SplitGame data={data[0]} tellResult={toldResult => handleResultSplitGame(toldResult)}/>
+                    <BasicButtonMidnight link={''} text={'Weiter'} className={''} onClick={handleButtonSplitGame}/>
                 </div>
-                <p className={'text-2xl text-center font-bold mt-4'}>{result}</p>
-                {ready
-                    ? <Link href={'/ugame'} passHref={false}>
-                        <div
-                            className={'text-white cursor-pointer text-center text-xl font-bold bg-midnight py-3 rounded-md'}>
-                            <p>WEITER</p>
-                        </div>
-                    </Link>
-                    : <div
-                        className={'text-white cursor-pointer text-center text-xl font-bold bg-midnight py-3 rounded-md'}
-                        onClick={() => buttonHandler()}>
-                        <p>PRÜFEN</p>
-                    </div>
-                }
-
-            </main>
-            <footer className={'text-midnight font-bold text-center mt-10'}>
-                <p>Copyright 2021 - David Melzer</p>
-            </footer>
+            </div>
+            <Footer/>
         </>
     )
 
-
-    function buttonHandler() {
-        let expected = data.splits
-        if (checker(placed, expected)) {
-            setReady(true)
-            setResult('Super, das ist richtig!')
+    function handleResultSplitGame(inputResult) {
+        let tmp = result
+        let tmp2 = [inputResult]
+        if (tmp.includes(inputResult)) {
+            let index = tmp.indexOf(inputResult)
+            if (index !== -1) {
+                tmp.splice(index, 1);
+            }
         } else {
-            setResult("Versuch's nochmal")
+            tmp.push(...tmp2)
+            setResult(tmp)
         }
-
     }
 
-    function checker(arr, target) {
-        return target.every(v => arr.includes(v))
+    function handleButtonSplitGame() {
+        let expected = data[0].splits
+        if (arrayCompare(result, expected)) {
+            console.log('Super, das ist richtig!')
+        } else {
+            console.log("Versuch's nochmal")
+        }
     }
 
-    function updateSplits(index) {
-        if (!placed.includes(index)) {
-            if (numOfSplits === 0) return
-            setNumOfSplits(numOfSplits - 1)
-            setPlaced([...placed, index])
-        } else {
-            setNumOfSplits(numOfSplits + 1)
-            let tmpIndex = placed.indexOf(index)
-            placed.splice(tmpIndex, 1)
+    function arrayCompare(_arr1, _arr2) {
+        if (
+            !Array.isArray(_arr1)
+            || !Array.isArray(_arr2)
+            || _arr1.length !== _arr2.length
+        ) {
+            return false;
         }
+
+        const arr1 = _arr1.concat().sort();
+        const arr2 = _arr2.concat().sort();
+
+        for (let i = 0; i < arr1.length; i++) {
+            if (arr1[i] !== arr2[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
-
 
 export default FiveGame
