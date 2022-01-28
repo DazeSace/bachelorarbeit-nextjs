@@ -6,6 +6,7 @@ import SplitGame from "../../components/v2/SplitGame";
 import BasicButtonMidnight from "../../components/v2/BasicButtonMidnight";
 import TranslateGame from "../../components/v2/TranslateGame";
 import EndGame from "../../components/v2/EndGame";
+import GameSummary from "../../components/v2/GameSummary";
 
 const FiveGame = () => {
 
@@ -24,6 +25,8 @@ const FiveGame = () => {
         },
     ]
 
+    const buttonHandlerFunctions = [handleButtonSplitGame, handleButtonTranslateGame, handleButtonEndGame]
+
     const [points, setPoints] = useState(0)
     const [gamePart, setGamePart] = useState(0)
     const [round, setRound] = useState(0)
@@ -40,7 +43,8 @@ const FiveGame = () => {
             <div className={'text-midnight h-screen -mt-16'}>
                 <div className={'h-full w-11/12 mx-auto'}>
                     {renderGames(gamePart)}
-                    <BasicButtonMidnight link={''} text={'Weiter'} className={''} onClick={handleButtonSplitGame}/>
+                    <BasicButtonMidnight link={gamePart === 3 ? '/v2' : ''} text={'Weiter'} className={''}
+                                         onClick={gamePart === 3 ? null : buttonHandlerFunctions[gamePart]}/>
                     <p className={'text-center mt-4 text-xl font-bold tracking-wide'}>Punkte: {points}</p>
                 </div>
             </div>
@@ -57,7 +61,7 @@ const FiveGame = () => {
             case 2:
                 return <EndGame data={data[round]}/>
             case 3:
-                return <EndGame data={data[round]}/>
+                return <GameSummary/>
         }
     }
 
@@ -80,6 +84,16 @@ const FiveGame = () => {
         if (arrayCompare(resultSplitGame, expected)) {
             setPoints(points + 10)
         }
+        setGamePart(gamePart + 1)
+    }
+
+    function handleButtonTranslateGame() {
+        console.log('Translate')
+        setGamePart(gamePart + 1)
+    }
+
+    function handleButtonEndGame() {
+        console.log('End')
         setGamePart(gamePart + 1)
     }
 
