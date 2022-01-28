@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Navbar from '../components/NavBar';
 import {useEffect, useState} from "react";
+import {AiOutlineDoubleRight} from "react-icons/ai";
 
 
 const UGame = () => {
@@ -23,9 +24,27 @@ const UGame = () => {
             }
         ]
 
+    const dropDownOptions = [
+        "Schmerz",
+        "Entzündung",
+        "Fieber",
+        "Erbrechen",
+        "Krebs, Geschwulst",
+        "Abgestorben",
+        "Tod",
+        "Gift",
+        "Krampf",
+        "Verstopfung",
+        "Verhärtung",
+        "Fluss",
+        "Lehre",
+        "Natur",
+    ]
+
     const [counter, setCounter] = useState(0)
     const [options, setOptions] = useState(data[counter].options)
     const [result, setResult] = useState('')
+    const [input, setInput] = useState('')
 
     useEffect(() => {
         setOptions(data[counter].options)
@@ -64,13 +83,22 @@ const UGame = () => {
                                 <p className={`text-3xl font-bold px-4 py-2 rounded-md ${counter === key ? 'border-4 border-fogra' : 'border-0'}`}
                                    key={key}>{part.label}</p>)}
                         </div>
-                        <div className={'flex flex-col justify-center p-3 mt-8 space-y-2'}>
-                            {options.map((option, key) =>
-                                <div key={key} className={'flex justify-center mx-auto px-4 py-2 rounded-md bg-carib'}
-                                     onClick={() => optionClickHandler(key)}>
-                                    <p className={`font-bold`}>{option}</p>
-                                </div>)}
-                            <p className={'text-center text-2xl pt-6'}>{result}</p>
+                        <div className={'w-1/3 p-3 mt-10 mx-auto'}>
+                            <div className={'flex'}>
+                                <input className={'p-3 w-full rounded-md'} type={'text'} onChange={(e) => {
+                                    setInput(e.target.value)
+                                    console.log(input)
+
+                                }}/>
+                                <div className={'py-3 px-5 bg-carib cursor-pointer rounded-md ml-4 font-extrabold'}>
+                                    <p className={'pt-1'}><AiOutlineDoubleRight/></p>
+                                </div>
+                            </div>
+                            <div className={'bg-white p-3 mt-2'}>
+                                {dropDownOptions.map((dropDownOption, key) =>
+                                    <p key={key}>{dropDownOption}</p>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
