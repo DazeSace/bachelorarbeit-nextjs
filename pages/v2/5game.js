@@ -32,7 +32,7 @@ const FiveGame = (props) => {
                     {letters.map((letter, key) => (
                         <div
                             key={key}
-                            className={'flex justify-center text-3xl text-fogra font-bold cursor-default'}>
+                            className={'flex justify-center text-xl text-fogra font-bold cursor-default'}>
                             {letter}
                             {key === letters.length - 1
                                 ? null

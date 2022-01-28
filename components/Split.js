@@ -11,7 +11,7 @@ const Split = (props) => {
 
     return (
         <div
-            className={`w-1 cursor-pointer h-10 mx-0.5 hover:bg-midnight ${selected ? 'bg-black' : ''}`}
+            className={`w-1 cursor-pointer h-8 mx-0.5 hover:bg-midnight ${selected ? 'bg-black' : ''}`}
             onClick={() => setSelected(!selected)}
         />
     )

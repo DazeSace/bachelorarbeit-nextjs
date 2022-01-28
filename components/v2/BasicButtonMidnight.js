@@ -4,7 +4,7 @@ const BasicButtonMidnight = (props) => {
     return (
         <Link href={props.link} passHref={false}>
             <div
-                className={'button-midnight mt-10'}>
+                className={`button-midnight ${props?.className}`}>
                 <p>{props.text}</p>
             </div>
         </Link>
