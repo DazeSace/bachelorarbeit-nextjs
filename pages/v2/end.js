@@ -3,7 +3,7 @@ import BasicButtonMidnight from "../../components/v2/BasicButtonMidnight";
 import Head from "next/head";
 import Footer from "../../components/v2/Footer";
 
-const index = () => {
+const end = () => {
     return (
         <>
             <Head>
@@ -13,9 +13,11 @@ const index = () => {
             </Head>
             <NavBar/>
             <div className={'text-midnight h-screen -mt-16'}>
-                <div className={'h-full w-11/12 mx-auto'}>
-                    <p className={'font-bold text-2xl mb-10 pt-24'}>Wähle ein Spiel-Modus aus:</p>
-                    <BasicButtonMidnight text={'5 Fragen'} link={'/v2/5game'}/>
+                <div className={'h-full w-11/12 md:w-2/3 mx-auto'}>
+                    <div className={'flex justify-center flex-col text-xl font-bold tracking-wide pt-48'}>
+                        <p className={'text-center'}>Gut gemacht!</p>
+                    </div>
+                    <BasicButtonMidnight text={'zurück zum Start'} link={'/v2'}/>
                 </div>
             </div>
             <Footer/>
@@ -23,4 +25,4 @@ const index = () => {
     )
 }
 
-export default index
+export default end

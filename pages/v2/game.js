@@ -8,20 +8,48 @@ import TranslateGame from "../../components/v2/TranslateGame";
 import EndGame from "../../components/v2/EndGame";
 import GameSummary from "../../components/v2/GameSummary";
 
-const FiveGame = () => {
+const Game = () => {
 
     const data = [
         {
             'id': 1,
             'word': 'pathophysiologisch',
             'splits': [4, 10],
-            'syllables': ['patho', 'physio', 'logisch'],
+            'parts':
+                [
+                    {
+                        'word': 'patho',
+                        'solution': 'Krankheit',
+                    },
+                    {
+                        'word': 'physio',
+                        'solution': 'Natur',
+                    },
+                    {
+                        'word': 'logisch',
+                        'solution': 'Lehre',
+                    },
+                ],
         },
         {
             'id': 2,
             'word': 'pathophysiologisch',
             'splits': [4, 10],
-            'syllables': ['patho', 'physio', 'logisch'],
+            'parts':
+                [
+                    {
+                        'word': 'patho',
+                        'solution': 'Krankheit',
+                    },
+                    {
+                        'word': 'physio',
+                        'solution': 'Natur',
+                    },
+                    {
+                        'word': 'logisch',
+                        'solution': 'Lehre',
+                    },
+                ],
         },
     ]
 
@@ -41,11 +69,13 @@ const FiveGame = () => {
             </Head>
             <NavBar/>
             <div className={'text-midnight h-screen -mt-16'}>
-                <div className={'h-full w-11/12 mx-auto'}>
+                <div className={'h-full w-11/12 md:w-2/3 mx-auto'}>
                     {renderGames(gamePart)}
-                    <BasicButtonMidnight link={gamePart === 3 ? '/v2' : ''} text={'Weiter'} className={''}
-                                         onClick={gamePart === 3 ? null : buttonHandlerFunctions[gamePart]}/>
-                    <p className={'text-center mt-4 text-xl font-bold tracking-wide'}>Punkte: {points}</p>
+                    <BasicButtonMidnight
+                        link={gamePart === 3 ? '/v2' : ''}
+                        text={gamePart === 3 ? 'zurück zum Start' : 'Weiter'} className={'lg:w-1/3 lg:mx-auto mt-10'}
+                        onClick={gamePart === 3 ? null : buttonHandlerFunctions[gamePart]}
+                    />
                 </div>
             </div>
             <Footer/>
@@ -57,7 +87,7 @@ const FiveGame = () => {
             case 0:
                 return <SplitGame data={data[round]} tellResult={toldResult => handleResultSplitGame(toldResult)}/>
             case 1:
-                return <TranslateGame data={data[round]}/>
+                return <TranslateGame data={data[round]} tellResult={toldResult => handleResultTranslateGame(toldResult)}/>
             case 2:
                 return <EndGame data={data[round]}/>
             case 3:
@@ -77,6 +107,10 @@ const FiveGame = () => {
             tmp.push(...tmp2)
             setResultSplitGame(tmp)
         }
+    }
+
+    function handleResultTranslateGame(inputResult) {
+        console.log(inputResult)
     }
 
     function handleButtonSplitGame() {
@@ -118,4 +152,4 @@ const FiveGame = () => {
     }
 }
 
-export default FiveGame
+export default Game
