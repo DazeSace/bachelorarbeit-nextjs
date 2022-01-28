@@ -72,7 +72,7 @@ const Game = () => {
                 <div className={'h-full w-11/12 md:w-2/3 mx-auto'}>
                     {renderGames(gamePart)}
                     <BasicButtonMidnight
-                        link={gamePart === 3 ? '/v2' : ''}
+                        link={gamePart === 3 ? '/' : ''}
                         text={gamePart === 3 ? 'zurück zum Start' : 'Weiter'} className={'lg:w-1/3 lg:mx-auto mt-10'}
                         onClick={gamePart === 3 ? null : buttonHandlerFunctions[gamePart]}
                     />
